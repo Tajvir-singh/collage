@@ -1,6 +1,6 @@
 <html>
     <head>
-       <title>Collage</title>
+       <title>RGB Color App</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -9,44 +9,16 @@
 <link href="style.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
 </head>
- 
-<body>
-    <div class="container">
-    <center>
-        <h1>Collage Web App
+<body class="body_backgorund">
+  <div align="center"> <h1>Coloring App<h1>
+    <canvas id="myCanvas" width="800"  height="400"></canvas>  <br><br> <span>Color = </span> <input type="Text" id="color" value=blue>
+  <br><br>
 
-        </h1>
-        <hr>
-        <h4 style="color:red;">Please press allow as soon as popup comes. After you give a voice command</h4>
-        
+    <button onclick="clearArea();">Clear Area</button>
+    
+    
 
-            <h3>Say "selfie" for taking your selfies and to make a Collage</h3>
-            
-        <button class="btn btn-primary" onclick="start()">Start</button> 
-        <p>Press the Start button</p>
-
-        <label>Your webcam : </label>
-        <div id="camera"></div>
-        <br>
-
-        <label>Your selfie Will Display Here: </label>
-        <div id="resultRow">
-            <div id="result!">
-                <img src="https://s-media-cache-ak0.pinimg.com/originals/7b/66/da/7b66dac3b9b7adf995c4d8aadcae3e62.jpg"width="800" height="800">
-            </div>
-            <br><br>
-            <div id="result2">
-                <img src="https://i.pinimg.com/originals/2a/b5/af/2ab5afda3961b8cb8fef2f5396c6f80c.jpg" width="800" height="800">
-
-            </div>
-            <br> <br>
-            <div id="result3">
-                <img src="https://th.bing.com/th/id/R.e2fa6cc4a9bbc0e0c43d01847a97105a?rik=lEfJOYIdwd7c2g&riu=http%3a%2f%2ffc03.deviantart.net%2ffs70%2fi%2f2012%2f253%2f5%2fc%2fcamera_tattoo_with_seattle_view_by_xlyricdx3-d5e8939.jpg&ehk=CZR3iZ78PJO2xt5Wk9z%2fwAg2oXFPbSSGhdidWQKZQg0%3d&risl=&pid=ImgRaw&r=0"width="800" height="800">
-            </div>
-        </div>
-    </center>
-    </div>
-
-    <script src="main.js"></script>
-</body>
-</html>
+          <script src="main.js"></script>
+  
+      </body>
+  </html>
