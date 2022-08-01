@@ -1,65 +1,60 @@
-var mouseEvent = "empty";
-var last_position_of_x, last_position_of_y;
-canvas = document.getElementById('myCanvas');
-ctx = canvas.getContext("2d");
-color = "black";
-width_of_line = 1;
-canvas.addEventListener("mousedown", my_mousedown);
+var SpeechRecognition = window.webkitSpeechRecognition;
+var Content;
+var recognition = new SpeechRecognition();
 
-function my_mousedown(e) {
-    color = document.getElementById("color").value;
+function start()
+{
+    recognition.start();
+} 
 
-    mouseEvent = "mouseDown";
+
+camera = document.getElementById("camera");
+Webcam.set({
+    width:500,
+    height:400,
+    image_format : 'jpeg',
+    jpeg_quality:90
+});
+
+
+
+function speak(){
+
+    
+    var synth = window.speechSynthesis;
+    Webcam.attach(camera);
+
+    speak_data = "Taking your next Selfie in 5 seconds";
+    var utterThis = new SpeechSynthesisUtterance(speak_data);
+    synth.speak(utterThis);
+
+
 }
-canvas.addEventListener("mousemove", my_mousemove);
 
-function my_mousemove(e) {
-    current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
-    current_position_of_mouse_y = e.clientY - canvas.offsetTop;
-    if (mouseEvent == "mouseDown") {
-        ctx.beginPath();
-        ctx.strokeStyle = color;
+setTimeout(function()
+{
+    img_id = "selfie1"
+    take_snapshot();
+    speak_dat = "taking your next Selfie in 10 seconds";
+    var utterThis = new SpeechSynthesisUtterance(speak_data);
+    synth.speak(utterThis);
+}, 5000);
 
-        ctx.moveTo(last_position_of_x, last_position_of_y);
-        ctx.lineTo(current_position_of_mouse_x, current_position_of_mouse_y);
-        ctx.stroke();
+function take_snapshot()
+ {
+     console.log(img_id);
+
+     Webcam.snap(function(data_uri){
+         if (img_id=="selfie1"){
+             document.getElementById("result1").innerHTML = '<img id ="selfie1" src="'+data_uri+'"/>';
+         }
+
+        if(img_id=="selfie2") {
+            document.getElementById("result1").innerHTML = '<img id ="selfie2" src="'+data_uri+'"/>';
+        }
+
+        if(img_id=="selfie3"){
+            document.getElementById("result1").innerHTML = '<img id ="selfie3" src="'+data_uri+'"/>';
+        }
+     });
     }
-    last_position_of_x = current_position_of_mouse_x;
-    last_position_of_y = current_position_of_mouse_y;
-}
-canvas.addEventListener("mouseup", my_mouseup);
-
-function my_mouseup(e) {
-    mouseEvent = "mouseUP";
-}
-canvas.addEventListener("mouseleave", my_mouseleave);
-
-function my_mouseleave(e) {
-    mouseEvent = "mouseleave";
-}
-var last_position_of_touch_x, last_position_of_touch_y;
-var width = screen.width;
-new_width = screen.width - 70;
-new_height = screen.height - 300;
-if (width < 992) {
-    document.getElementById("myCanvas").width = new_width;
-    document.getElementById("myCanvas").height = new_height;
-    document.body.style.overflow = "hidden";
-}
-canvas.addEventListener("touchstart", my_touchstart);
-
-function my_touchstart(e) {
-    console.log("my_touchstart");
-    color = document.getElementById("color").value;
-    last_position_of_touch_x = e.touches[0].clientX - canvas.offsetLeft;
-    ctx.moveTo(last_position_of_touch_x, last_position_of_touch_y);
-    ctx.lineTo(current_position_of_touch_x, current_position_of_touch_y);
-    ctx.stroke();
-    last_position_of_touch_x = current_position_of_touch_x;
-    last_position_of_touch_y = current_position_of_touch_y;
-}
-
-function clearArea() {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}
-
